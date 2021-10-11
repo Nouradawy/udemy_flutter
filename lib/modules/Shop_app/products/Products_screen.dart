@@ -8,40 +8,92 @@ import 'package:udemy_flutter_1/Layout/Shop_app/Cubit/Cubit.dart';
 import 'package:udemy_flutter_1/Layout/Shop_app/Cubit/states.dart';
 import 'package:udemy_flutter_1/components/Companents.dart';
 import 'package:udemy_flutter_1/components/constants.dart';
+import 'package:udemy_flutter_1/modules/Shop_app/categories/categoriesModule.dart';
 
 import 'ShopProductsModule.dart';
 
 class ProductsScreen extends StatelessWidget {
+  static get image => null;
+
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context , state) {
-
-
-      },
+      listener: (context , state) {},
       builder: (context , state) {
 
         return ConditionalBuilder(
             condition: ShopCubit.get(context).homeModel != null,
             builder: (context) {
-
-
               ShopCubit Cubit = ShopCubit.get(context);
-              return ProductsBuilder(ShopCubit
-                  .get(context)
-                  .homeModel!, context);
+              return ProductsBuilder(Cubit.homeModel!, context);
             },
             fallback:(context) => Center(child: CircularProgressIndicator()));
       },
     );
   }
 
+  // ADD-LIST-TO-LIST: New list for adding values from it and indexing it .
+  List imagelist = [
+    {
+      "https://media-exp1.licdn.com/dms/image/C4E1BAQGENeCDJ5VXPg/company-background_10000/0/1559151958971?e=2159024400&v=beta&t=aVOx6JocN4tZFBf4ssICncreN4NSR3X86Btrn_WtTbk"
+    },
+    {
+      "https://cdn.shopify.com/s/files/1/0412/8728/6937/collections/electronic-gadgets_1200x1200.jpg?v=1592481285"
+    },
+    {
+      "https://media-exp1.licdn.com/dms/image/C4E1BAQGENeCDJ5VXPg/company-background_10000/0/1559151958971?e=2159024400&v=beta&t=aVOx6JocN4tZFBf4ssICncreN4NSR3X86Btrn_WtTbk"
+    },
+    {
+      "https://cdn.shopify.com/s/files/1/0412/8728/6937/collections/electronic-gadgets_1200x1200.jpg?v=1592481285"
+    }
+  ];
+
+
+
   Widget ProductsBuilder(HomeModel model , context) {
     ShopCubit Cubit = ShopCubit.get(context);
         return SingleChildScrollView(
           child: Column(
             children: [
+              Text('Categoreis'),
+            //   CarouselSlider.builder(
+            //       itemCount: Cubit.categoriesModel?.data?.data.length,
+            //       itemBuilder:(BuildContext,imageIndex,index) {
+            //   return Column(
+            //     children:[ CircleAvatar(
+            //       backgroundImage: NetworkImage(imagelist[imageIndex]),
+            //       radius: 35,
+            //     ),
+            //      Text('${Cubit.categoriesModel?.data?.data[imageIndex].name}'),
+            //     ]
+            //   );
+            // },
+            // options: CarouselOptions(
+            //         height: 130.0,
+            //         initialPage: 0,
+            //         viewportFraction: 0.21,
+            //         enableInfiniteScroll: false,
+            //         reverse: false,
+            //         autoPlay: false,
+            //         autoPlayInterval: Duration(seconds: 3),
+            //         autoPlayAnimationDuration: Duration(seconds: 1),
+            //         autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+            //         scrollDirection: Axis.horizontal,
+            //         disableCenter: true,
+            //       ),),
+              Stack(
+                children: [
+                  imagelist.forEach((e) => CircleAvatar(
+                    backgroundImage: NetworkImage('$e'),
+                  ),),
+
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text('Featured'),
               CarouselSlider(
                 items: model.data.banners.map((element) =>
                     Image(

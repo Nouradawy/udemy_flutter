@@ -11,15 +11,24 @@ import 'package:udemy_flutter_1/modules/Shop_app/categories/categoriesModule.dar
 import 'package:udemy_flutter_1/modules/Shop_app/favorites/Change_Favorites_Model.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/favorites/Favorites_screen.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/favorites/Get_Favorites_Model.dart';
+import 'package:udemy_flutter_1/modules/Shop_app/on_boarding/on_boarding_screen.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/products/Products_screen.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/products/ShopProductsModule.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/settings/Settings_screen.dart';
 
+
+
+
 class ShopCubit extends Cubit<ShopStates>
 {
+
   ShopCubit() : super(ShopInitialState());
 
   static ShopCubit get(context) => BlocProvider.of(context);
+  HomeModel? homeModel ;
+  CategoriesModel? categoriesModel;
+  ChangeFavoritesModel? ChangeFavorites;
+  getFavoritesModel? GetFavoritesModel;
 
   int CurrentIndex = 0;
 
@@ -35,14 +44,11 @@ void changeBottom(int index)
   CurrentIndex = index;
   emit(ShopChangeBottomNavState());
 }
-HomeModel? homeModel ;
-CategoriesModel? categoriesModel;
-ChangeFavoritesModel? ChangeFavorites;
-getFavoritesModel? GetFavoritesModel;
-// late ProductModel productModel;
+
 
   Map<int,bool> favorites={};
   IconData? FavIcon;
+
   void getHomeData() {
 
     emit(ShopLoadingHomeDataState());
@@ -59,7 +65,6 @@ getFavoritesModel? GetFavoritesModel;
         });
 
       });
-
       emit(ShopSuccessHomeDataState());
 
     }).catchError((error) {
@@ -69,13 +74,16 @@ getFavoritesModel? GetFavoritesModel;
   }
 
   void getCategoriesData() {
-    emit(ShopLoadingHomeDataState());
+
+
+    emit(ShopLoadingCategoriesDataState());
 
     DioHelper.getData(
       url: Categories,
       token:token,
     ).then((value) {
       categoriesModel = CategoriesModel.formJson(value.data);
+
 
 
       emit(ShopSuccessCategoriesState());

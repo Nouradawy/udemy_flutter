@@ -8,6 +8,7 @@ import 'package:udemy_flutter_1/Layout/Todo_app/cubit/cubit.dart';
 import 'package:udemy_flutter_1/Layout/Todo_app/cubit/states.dart';
 import 'package:udemy_flutter_1/Network/local/cache_helper.dart';
 import 'package:udemy_flutter_1/components/Companents.dart';
+import 'package:udemy_flutter_1/components/constants.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/Login/Cubit/Cubit.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/Login/Cubit/states.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/Register/ShopRegisterScreen.dart';
@@ -33,6 +34,8 @@ class ShopLoginScreen extends StatelessWidget {
                 print(state.LoginModel.data!.token);
                 cacheHelper.saveData(key: 'token',
                   value: state.LoginModel.data!.token,).then((value){
+                  token = state.LoginModel.data!.token!;
+
                   Navigator.pushAndRemoveUntil(context,
                       MaterialPageRoute(builder: (BuildContext context) => ShopLayout(),
                   ),

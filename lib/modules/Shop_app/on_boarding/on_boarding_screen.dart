@@ -6,14 +6,14 @@ import 'package:udemy_flutter_1/modules/Shop_app/Login/ShopLoginScreen.dart';
 
 class BoardingModel
 {
-  final String image;
-  final String title;
-  final String body;
+  final dynamic image;
+  final String? title;
+  final String? body;
 
   BoardingModel({
     required this.image,
-    required this.title,
-    required this.body,
+    this.title,
+    this.body,
   });
 
 }

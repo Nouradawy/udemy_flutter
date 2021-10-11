@@ -7,6 +7,7 @@ class ShopInitialState extends ShopStates{}
 class ShopChangeBottomNavState extends ShopStates{}
 
 class ShopLoadingHomeDataState extends ShopStates{}
+class ShopLoadingCategoriesDataState extends ShopStates{}
 class ShopSuccessHomeDataState extends ShopStates{}
 class ShopSuccessCategoriesState extends ShopStates{}
 class ShopSuccessGetFavoritesState extends ShopStates{}

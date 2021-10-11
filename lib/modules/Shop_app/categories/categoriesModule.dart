@@ -1,12 +1,12 @@
 class CategoriesModel
 {
   late bool status;
-  late CategoriesPageData data;
+  CategoriesPageData? data;
 
   CategoriesModel.formJson(Map<String,dynamic>json)
   {
     status = json['status'];
-    data = CategoriesPageData.fromJson(json['data']);
+    data = json['data'] != null ? new CategoriesPageData.fromJson(json['data']) : null;
   }
 }
 
@@ -17,10 +17,8 @@ class CategoriesPageData{
   late int from;
   late int LastPage;
   late String LastPageurl;
-  late String NextPageurl;
   late String Path;
   late int PerPage;
-  late String PrevPaageurl;
   late int total;
   List<CategoriesData> data =[];
 
@@ -31,15 +29,19 @@ class CategoriesPageData{
     from = json["from"];
     LastPage = json["last_page"];
     LastPageurl = json["last_page_url"];
-    NextPageurl = json["next_page_url"];
     Path = json["path"];
     PerPage = json["per_page"];
-    PrevPaageurl = json["prev_page_url"];
     total = json["total"];
     json['data'].forEach((element)
     {
-      data.add(CategoriesData.fromJson(json['data']));
+        data.add(CategoriesData.fromJson({
+          'name': element['name'],
+          'id': element['id'],
+          'image' : element['image'],
+        }));
     });
+    ///* ADD-LIST-TO-LIST: Using this method to add only keys from the Json libery
+    /// keys : value
 
   }
 }
@@ -55,4 +57,6 @@ class CategoriesData{
     name = json['name'];
     image = json['image'];
   }
+
+
 }

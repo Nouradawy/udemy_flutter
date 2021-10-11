@@ -18,7 +18,7 @@ class favoritesScreen extends StatelessWidget {
 
         return ConditionalBuilder(
             condition: true,
-            builder: (context) => ProductsBuilder(ShopCubit.get(context).GetFavoritesModel! ,context),
+            builder: (context) => ProductsBuilder(ShopCubit.get(context).GetFavoritesModel! ,context ),
             fallback:(context) => Center(child: CircularProgressIndicator()));
       },
     );
@@ -33,12 +33,12 @@ class favoritesScreen extends StatelessWidget {
         crossAxisCount: 2,
     children:
       List.generate(model.data.data.length, (index) =>
-          builderGridProduct(model.data.data[index], context),
+          builderGridProduct(model.data.data[index], context,index),
       ),
     ),
   );
 
-  Widget builderGridProduct(FavoritesData model , context)
+  Widget builderGridProduct(FavoritesData model , context,index)
   {
     ShopCubit Cubit = ShopCubit.get(context);
     return Column(
@@ -70,8 +70,8 @@ class favoritesScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: IconButton(onPressed: () {
-                  ShopCubit.get(context).changeFavorites(model.id);
-                  print('product Id: ' + '${model.id}');
+                  ShopCubit.get(context).changeFavorites(Cubit.homeModel!.data.products[index].id);
+                  // ShopCubit.get(context).getFavoritesData();
                   // showToast(
                   //   text: ShopCubit
                   //       .get(context)
@@ -81,7 +81,7 @@ class favoritesScreen extends StatelessWidget {
                   //   state: ToastStates.SUCCESS,
                   // );
                 },
-                  icon: Icon(Cubit.favorites[model.id] == true
+                  icon: Icon(Cubit.favorites[Cubit.homeModel?.data.products[index].id] == true
                       ? Cubit.FavIcon = Icons.favorite
                       : Cubit.FavIcon = Icons.favorite_border, size: 18,
                   ),

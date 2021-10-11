@@ -39,7 +39,7 @@ class CategoriesScreen extends StatelessWidget {
   ];
 
   Widget buildCategories(CategoriesData model , context , index) => Padding(          // ADD-LIST-TO-LIST: By using index value to get the index that going to be used into the imagelist[index]
-    padding: const EdgeInsets.all(28.0),
+    padding: const EdgeInsets.symmetric(horizontal: 35.0 , vertical: 15),
     child: Column(
       children: [
         Row(
@@ -49,10 +49,10 @@ class CategoriesScreen extends StatelessWidget {
 
               },
               child: Container(
-                width: 110.0,
-                height: 110.0,
+                width: 85.0,
+                height: 85.0,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: Colors.black38, width: 3,),
                   image:DecorationImage(
                     image:NetworkImage(imagelist[index]),
@@ -61,8 +61,8 @@ class CategoriesScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 10.0,),
-            Expanded(child: Center(child: Text(model.name))),
+            SizedBox(width: 35.0,),
+            Expanded(child: Text(model.name)),
             Center(child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios))),
           ],
         ),

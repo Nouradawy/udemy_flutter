@@ -31,6 +31,7 @@ void main() async
   bool? isDark = cacheHelper.getData(key: 'isDark');
   bool? onBoarding = cacheHelper.getData(key: 'onBoarding');
   token = cacheHelper.getData(key: 'token');
+  print("AuthorizationToken: "+token.toString());
   Widget homescreen = ShopLayout();
   if(onBoarding != null)
     {

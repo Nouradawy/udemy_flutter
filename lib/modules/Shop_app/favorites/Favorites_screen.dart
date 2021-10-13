@@ -70,7 +70,7 @@ class favoritesScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: IconButton(onPressed: () {
-                  ShopCubit.get(context).changeFavorites(Cubit.homeModel!.data.products[index].id);
+                  ShopCubit.get(context).changeFavorites(model.product.id);
                   // ShopCubit.get(context).getFavoritesData();
                   // showToast(
                   //   text: ShopCubit
@@ -81,7 +81,7 @@ class favoritesScreen extends StatelessWidget {
                   //   state: ToastStates.SUCCESS,
                   // );
                 },
-                  icon: Icon(Cubit.favorites[Cubit.homeModel?.data.products[index].id] == true
+                  icon: Icon(Cubit.favorites[model.product.id] == true
                       ? Cubit.FavIcon = Icons.favorite
                       : Cubit.FavIcon = Icons.favorite_border, size: 18,
                   ),

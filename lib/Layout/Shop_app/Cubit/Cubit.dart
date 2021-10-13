@@ -6,6 +6,7 @@ import 'package:udemy_flutter_1/Layout/Shop_app/Cubit/states.dart';
 import 'package:udemy_flutter_1/Network/Endpoints.dart';
 import 'package:udemy_flutter_1/Network/remote/dio_helper.dart';
 import 'package:udemy_flutter_1/components/constants.dart';
+import 'package:udemy_flutter_1/modules/Shop_app/Login/loginmodel.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/categories/CategoriesScreen.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/categories/categoriesModule.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/favorites/Change_Favorites_Model.dart';
@@ -29,6 +30,7 @@ class ShopCubit extends Cubit<ShopStates>
   CategoriesModel? categoriesModel;
   ChangeFavoritesModel? ChangeFavorites;
   getFavoritesModel? GetFavoritesModel;
+  ShopLoginModel? shopLoginModel;
 
   int CurrentIndex = 0;
 
@@ -162,6 +164,23 @@ void changeBottom(int index)
     }).catchError((error) {
       print(error.toString());
       emit(ShopErrorGetFavorietsState());
+    });
+  }
+
+  void getUserData() {
+    emit(ShopLoadingUserDataState());
+
+    DioHelper.getData(
+      url: PROFILE,
+      token:token,
+    ).then((value) {
+      shopLoginModel = ShopLoginModel.fromjson(value.data);
+
+      emit(ShopSuccessUserState(shopLoginModel!));
+
+    }).catchError((error) {
+      print(error.toString());
+      emit(ShopErrorUserState());
     });
   }
 

@@ -23,18 +23,7 @@ class UserData
   int? points;
   int? credit;
   String? token;
-
-  UserData(
-      {
-        this.email,
-        this.credit,
-        this.id,
-        this.image,
-        this.name,
-        this.phone,
-        this.points,
-        this.token});
-
+  
   UserData.fromjson(Map<String , dynamic> json)
   {
     email = json['email'];

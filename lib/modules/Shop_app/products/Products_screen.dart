@@ -14,19 +14,22 @@ import 'ShopProductsModule.dart';
 class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return ConditionalBuilder(
-            condition: ShopCubit
-                .get(context)
-                .homeModel != null,
-            builder: (context) {
-              ShopCubit Cubit = ShopCubit.get(context);
-              return ProductsBuilder(Cubit.homeModel!, context);
-            },
-            fallback: (context) => Center(child: CircularProgressIndicator()));
-      },
+    return BlocProvider.value(
+      value: ShopCubit()..getHomeData()..getFavoritesData()..getCategoriesData()..postRegisterdData()..getUserData(),
+      child: BlocConsumer<ShopCubit, ShopStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return ConditionalBuilder(
+              condition: ShopCubit
+                  .get(context)
+                  .homeModel != null,
+              builder: (context) {
+                ShopCubit Cubit = ShopCubit.get(context);
+                return ProductsBuilder(Cubit.homeModel!, context);
+              },
+              fallback: (context) => Center(child: CircularProgressIndicator()));
+        },
+      ),
     );
   }
 

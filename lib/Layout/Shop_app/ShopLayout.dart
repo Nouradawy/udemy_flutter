@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udemy_flutter_1/Network/local/cache_helper.dart';
 import 'package:udemy_flutter_1/components/constants.dart';
+import 'package:udemy_flutter_1/modules/Shop_app/Login/Cubit/Cubit.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/search/Search_screen.dart';
+import 'package:udemy_flutter_1/components/constants.dart';
 
 import 'Cubit/Cubit.dart';
 import 'Cubit/states.dart';
 
 class ShopLayout extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(

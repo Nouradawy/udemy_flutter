@@ -31,6 +31,7 @@ class ShopLoginCubit extends Cubit<ShopLoginState> {
 
       // print(LoginModel!.message);
       // print(LoginModel!.status);
+      token = LoginModel?.data?.token;
       emit(ShopLoginSuccessState(LoginModel!));
     }).catchError((error) {
       emit(ShopLoginErrorState(error.toString()));

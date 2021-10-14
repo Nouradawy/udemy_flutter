@@ -7,6 +7,7 @@ import 'package:udemy_flutter_1/Network/Endpoints.dart';
 import 'package:udemy_flutter_1/Network/remote/dio_helper.dart';
 import 'package:udemy_flutter_1/components/constants.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/Login/loginmodel.dart';
+import 'package:udemy_flutter_1/modules/Shop_app/Register/RegisterModel.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/categories/CategoriesScreen.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/categories/categoriesModule.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/favorites/Change_Favorites_Model.dart';
@@ -31,7 +32,8 @@ class ShopCubit extends Cubit<ShopStates>
   ChangeFavoritesModel? ChangeFavorites;
   getFavoritesModel? GetFavoritesModel;
   ShopLoginModel? shopLoginModel;
-
+  RegisterModel? registerModel;
+  String? Textout;
   int CurrentIndex = 0;
 
 List<Widget> bottomScreens = [
@@ -50,6 +52,7 @@ void changeBottom(int index)
 
   Map<int,bool> favorites={};
   IconData? FavIcon;
+  Map<String,dynamic> Register = {};
 
   void getHomeData() {
 
@@ -182,6 +185,39 @@ void changeBottom(int index)
       print(error.toString());
       emit(ShopErrorUserState());
     });
+  }
+
+  void postRegisterdData({String? name , String? email , String? phone , String? password}) {
+
+    emit(ShopLoadingPostRegisterDataState());
+    Textout = "We are trying to Register your data into our data base";
+    DioHelper.postData(
+      url: REGISTER,
+      data: {
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "password": password,
+      },
+    ).then((value) {
+      registerModel = RegisterModel.fromJson(value.data);
+
+      emit(ShopSuccessPostRegisterDataState());
+      Textout = "Setback and relax while we Trying to sign you in";
+
+
+    }).catchError((error) {
+      print(error.toString());
+      emit(ShopErrorPostRegisterDataState());
+    });
+  }
+
+  bool isPassword = true;
+  IconData? suffixIcon = Icons.visibility;
+  void Passon(){
+    isPassword =! isPassword;
+    suffixIcon = isPassword ?Icons.visibility:Icons.visibility_off;
+    emit(ShopIsPasswordState());
   }
 
 

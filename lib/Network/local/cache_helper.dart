@@ -36,7 +36,11 @@ class cacheHelper {
 
   static dynamic DeleteData({
     required String key,
-  })=>sharedPreferences.remove(key);
+  }){
+
+    return sharedPreferences.remove(key);
+
+  }
 
 }
 

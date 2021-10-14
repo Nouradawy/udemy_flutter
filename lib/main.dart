@@ -11,6 +11,7 @@ import 'package:udemy_flutter_1/Network/local/cache_helper.dart';
 import 'package:udemy_flutter_1/Network/remote/dio_helper.dart';
 import 'package:udemy_flutter_1/components/constants.dart';
 import 'package:udemy_flutter_1/counter/counter_screen.dart';
+import 'package:udemy_flutter_1/modules/Shop_app/Login/Cubit/Cubit.dart';
 import 'package:udemy_flutter_1/modules/Shop_app/on_boarding/on_boarding_screen.dart';
 import 'Layout/News_app/NewsLayout.dart';
 import 'Layout/Shop_app/Cubit/Cubit.dart';
@@ -70,7 +71,11 @@ class MyApp extends StatelessWidget
         BlocProvider(
           create: (context) => NewsCubit()..getBusiness(),),
         BlocProvider(
-          create: (context) => ShopCubit()..getHomeData()..getFavoritesData()..getCategoriesData()..getUserData(),),
+          create: (context) =>ShopLoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ShopCubit()..getHomeData()..getCategoriesData()..getUserData(),
+        ),
       ],
       child: BlocConsumer<AppCubit , AppStates>(
         listener: (context, state){},
@@ -149,7 +154,9 @@ class MyApp extends StatelessWidget
           // themeMode: AppCubit.get(context).isDark? ThemeMode.dark : ThemeMode.light,
           themeMode: ThemeMode.light,
           debugShowMaterialGrid: false,
-          home: HomeScreen,
+          home: BlocProvider.value(
+              value: ShopCubit.get(context)..getFavoritesData..getUserData(),
+              child: HomeScreen),
         );
       },
       ),

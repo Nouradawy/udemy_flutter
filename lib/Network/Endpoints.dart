@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-/* //device/apps/common/assets/res/any/strings.xml
-**
-** Copyright 2006, The Android Open Source Project
-**
-** Licensed under the Apache License, Version 2.0 (the "
+const LOGIN = 'login';
+const HOME = 'home';
+const Categories = 'categories';
+const FAVORITES = 'favorites';
+const PROFILE = 'profile';
+const REGISTER = 'register';
+
+
